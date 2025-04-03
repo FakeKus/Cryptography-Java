@@ -11,14 +11,14 @@ import org.alexandre.forms.Client;
 
 public class ClientDAO {
 
-    // Iniciando variáveis
+    //Iniciando variáveis
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     private final List<Client> listClients = new ArrayList<>();
 
-    // Declaração das consultas SQL
+    //Declaração das consultas SQL
     private final String insert         = "INSERT INTO clients (id, name, cardToken, value) VALUES (?, ?, ?, ?)";
     private final String select         = "SELECT * FROM clients";
     private final String selectWhere    = "SELECT * FROM clients WHERE id = ?";
@@ -27,7 +27,7 @@ public class ClientDAO {
     private final String deleteWhere    = "DELETE FROM clients WHERE id = ?";
 
     public ClientDAO() {
-        // Inicializa a conexão com o banco de dados
+        //Inicializa a conexão com o banco de dados
         connection = null;
         preparedStatement = null;
         resultSet = null;
@@ -37,20 +37,19 @@ public class ClientDAO {
 
     public void insertData(Client client) {
         try {
-            // Prepara a consulta de inserção
+            //Prepara a consulta de inserção
             preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, client.getId());
             preparedStatement.setString(2, client.getName());
             preparedStatement.setString(3, client.getCardToken());
             preparedStatement.setLong(4, client.getValue());
 
-            // Executa a inserção
+            //Executa a inserção
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao inserir dados: (ClientDAO)001\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
@@ -66,12 +65,12 @@ public class ClientDAO {
 
     public List<Client> getData() {
         try {
-            // Prepara a consulta de seleção
+            //Prepara a consulta de seleção
             preparedStatement = connection.prepareStatement(select);
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                // Cria um objeto Subject a partir dos dados do ResultSet
+                //Cria um objeto Subject a partir dos dados do ResultSet
                 Client client = new Client.Builder()
                         .setId(resultSet.getLong("id"))
                         .setName(resultSet.getString("name"))
@@ -84,10 +83,9 @@ public class ClientDAO {
 
             return listClients;
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao buscar dados: (ClientDAO)003\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (resultSet != null) {
                     resultSet.close();
@@ -108,13 +106,13 @@ public class ClientDAO {
 
     public Client getData(Long id) {
         try {
-            // Prepara a consulta de seleção com filtro
+            //Prepara a consulta de seleção com filtro
             preparedStatement = connection.prepareStatement(selectWhere);
             preparedStatement.setLong(1, id);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                // Cria um objeto Subject a partir dos dados do ResultSet
+                //Cria um objeto Subject a partir dos dados do ResultSet
                 return new Client.Builder()
                         .setId(resultSet.getLong("id"))
                         .setName(resultSet.getString("name"))
@@ -123,10 +121,9 @@ public class ClientDAO {
                         .build();
             }
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao buscar dados: (ClientDAO)005\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (resultSet != null) {
                     resultSet.close();
@@ -147,20 +144,19 @@ public class ClientDAO {
 
     public void updateData(Client client) {
         try {
-            // Prepara a consulta de atualização
+            //Prepara a consulta de atualização
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, client.getName());
             preparedStatement.setString(2, client.getCardToken());
             preparedStatement.setLong(3, client.getValue());
             preparedStatement.setLong(4, client.getId());
 
-            // Executa a atualização
+            //Executa a atualização
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao atualizar dados: (ClientDAO)007\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
@@ -176,16 +172,15 @@ public class ClientDAO {
 
     public void deleteData() {
         try {
-            // Prepara a consulta de exclusão
+            //Prepara a consulta de exclusão
             preparedStatement = connection.prepareStatement(delete);
 
-            // Executa a exclusão
+            //Executa a exclusão
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao deletar dados: (ClientDAO)009\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
@@ -201,17 +196,16 @@ public class ClientDAO {
 
     public void deleteData(Long id) {
         try {
-            // Prepara a consulta de exclusão com filtro
+            //Prepara a consulta de exclusão com filtro
             preparedStatement = connection.prepareStatement(deleteWhere);
             preparedStatement.setLong(1, id);
 
-            // Executa a exclusão
+            //Executa a exclusão
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao deletar dados: (ClientDAO)011\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
@@ -227,7 +221,7 @@ public class ClientDAO {
 
     public boolean existsData(Long id) {
         try {
-            // Prepara a consulta de verificação de existência
+            //Prepara a consulta de verificação de existência
             preparedStatement = connection.prepareStatement(selectWhere);
             preparedStatement.setLong(1, id);
 
@@ -236,10 +230,9 @@ public class ClientDAO {
                 return true;
             }
         } catch (Exception e) {
-            // Trata exceções e exibe mensagem de erro
             System.out.println("Erro ao buscar dados: (ClientDAO)012\n" + e);
         } finally {
-            // Fecha a conexão e os recursos
+            //Fecha a conexão e os recursos
             try {
                 if (resultSet != null) {
                     resultSet.close();
