@@ -2,10 +2,12 @@ package org.alexandre.forms;
 
 public class Client {
 
-    private long id;
+    private Long id;
     private String name;
     private String cardToken;
-    private long value;
+    private Long value;
+
+    public Client() {}
 
     private Client(Builder builder) {
         this.id = builder.id;
@@ -20,7 +22,7 @@ public class Client {
         private String cardToken;
         private long value;
 
-        public Builder setId(long id) {
+        public Builder setId(Long id) {
             this.id = id;
             return this;
         }
@@ -42,10 +44,10 @@ public class Client {
         }
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,10 +65,10 @@ public class Client {
         this.cardToken = cardToken;
     }
 
-    public long getValue() {
+    public Long getValue() {
         return value;
     }
-    public void setValue(long value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 }

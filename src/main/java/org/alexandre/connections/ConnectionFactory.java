@@ -9,7 +9,7 @@ public class ConnectionFactory {
     private static final String PASSWORD = "";                                    //Senha do Banco de Dados
     private static final String DATABASE_URL = "jdbc:sqlite:"
             + System.getProperty("user.dir").replace("\\", "/")
-            + "/src/main/resources/database/";                                    //URL para o Banco de Dados
+            + "/src/main/resources/database/clients.db";                                    //URL para o Banco de Dados
 
     public static Connection connectDB() {
 
@@ -18,7 +18,7 @@ public class ConnectionFactory {
 
             return DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         } catch (Exception e) {
-            System.out.println("Erro ao conectar com o banco de dados: 001(ConnectionFactory)\n" + e);
+            System.out.println("Erro ao conectar com o banco de dados: (ConnectionFactory)001\n" + e);
 
             return null;
         }
